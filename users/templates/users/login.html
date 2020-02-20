@@ -1,0 +1,25 @@
+{%load static%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/users.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div class="login-form">
+
+		<form method="post">
+			{% csrf_token %}
+			{% for f in form %}
+				{{f.label}}
+				<br>{{f}}<br>
+			{% endfor %}
+			<button type='submit' value='submit'> Submit </button>	
+		</form>	
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,600&display=swap');
+
+* {
+	font-family: 'Quicksand', sans-serif;
+}
+
+form {
+	margin-top: 5em;
+}
+
+.labels{
+	margin-top: 5px;
+	display: inline-block;
+}
+
+input {
+	width: 100%;
+	margin-top: 5px;
+	border: 1px solid #111;
+}
+
+#id_codigo_postal_2 {
+	width: 70%;
+	float:right;
+}
+
+#id_distrito {
+	border: 1px solid #111;
+	width: 100%;
+	height: 100%;
+}
+
+#input_btn {
+	border: 1px solid #111 ;
+    background: #fff ;
+    margin-top: 2em;
+    height: 3em ;
+    transition: 0.2s;
+}
+
+#input_btn:hover {
+	background: #59eb55;
+}
+
+.ordering-products {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.ordered-product {
+    color: #fff;
+    font-size: 30px;
+}
+
+.ordered-product-price {
+	font-size: 30px;
+    color: #ffff;
+    float: right;
+}
+
+.ordered-subtotal {
+	font-size: 30px;
+    color: #ffff;
+}
+
+.order-subtotal-number {
+	font-size: 30px;
+    color: #ffff;
+    float: left;	
+}
+
+.ordered-total {
+	font-size: 30px;
+    color: #ffff;
+    float: left;
+}
+
+.order-total-number {
+	font-size: 30px;
+    color: #ffff;
+    float: right;	
+}

@@ -1,0 +1,55 @@
+{% extends 'catalog/base.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{%block content%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/catalog.css' %}">
+
+<div class="row mt-4">
+	
+	<a class="col-12 ml-4 home-link" href="{% url 'catalog' %}">  &#8592; Catálogo </a>
+	
+	<div class="col-10  offset-1 mt-4">
+		<h4 class="mb-4">Por favor, confirme a sua encomenda:</h4>
+		<div class="col-12"> 
+				<div class="col-12">Nome Completo: {{order.nome_completo}}</div>
+				<div class="col-12">E-mail: {{order.email}}</div>			
+				<div class="col-12">Morada: {{order.rua}}, {{order.numero}}, {{order.andar}}, {{order.localidade}}, {{order.codigo_postal_1}}-{{order.codigo_postal_2}}, {{order.distrito}}  </div>
+		</div>
+
+		<div class="col-12 mt-4">
+			{% for p in cart.products.all %}
+				<div class="col-12"> {{p.name}} 
+					{% if 'Granel' in p.product_type %}
+					 ({{p.size}})
+					{% endif %}
+
+					<span class="float-right"> {{p.price}} € </span> </div>
+			{% endfor %} 
+		</div>
+
+
+		<div class="col-12 mt-4"> 
+				<div class="col-12">Subtotal: 
+					<span class="float-right" style="font-weight: 600">{{cart.subtotal}} €</span>
+				</div>
+				<div class="col-12">Total:
+					<span class="float-right" style="font-weight: 600"> {{cart.total}} € 
+					</span>
+				</div>			
+		</div>
+	
+	<div class="col-12 mt-4 mb-4">
+		<button> Pagar </button>
+	</div>
+	</div>
+
+<script type="text/javascript" src="{% static 'catalog/js/catalog.js' %}"></script>
+{%endblock%}
+</body>
+</html>

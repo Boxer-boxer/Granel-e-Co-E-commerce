@@ -1,0 +1,110 @@
+{% extends 'catalog/base.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{%block content%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/catalog.css' %}">
+
+<div class="row mt-4">
+	<a class="col-12 ml-4 home-link" href="{% url 'catalog' %}">  &#8592; Catálogo </a>
+	
+	<div class="col-lg-6 col-sm-10 offset-1"> 
+		<form method='post' class="order-form mt-4" style="width:100%">
+		<h4> Por favor preencha este formulário: </h4>
+			{% csrf_token %}
+			
+			<div class="row">
+				<div class="labels col-12">{{form.nome_completo.label}}</div>
+			</div>
+
+			<div class="row">
+				<div class="input col-12"> {{form.nome_completo}}</div>
+			</div>
+
+			<div class="row">
+				<div class="labels col-12">{{form.email.label}}</div>
+			</div>
+
+			<div class="row">
+				<div class="input col-12">{{form.email}} </div>
+			</div>
+
+			<div class="row">
+				<div class="labels col-8">{{form.rua.label}}</div>
+				<div class="labels col-4"> Número </div>
+			</div>
+			<div class="row">
+				<div class="input col-8" id="street">{{form.rua}} </div>
+				<div class="input col-4" id="number">{{form.numero}} </div>
+			</div>
+
+			<div class="row">
+				<div class="labels col-2">{{form.andar.label}}</div>
+				<div class="labels col-4">Código Postal</div>
+				<div class="labels col-3">{{form.localidade.label}}</div>
+				<div class="labels col-3">{{form.distrito.label}}</div>
+			</div>
+			<div class="row">
+				<div class="input col-2" id="andar">{{form.andar}} </div>
+				<div class="input col-2" id="postal_code_1">{{form.codigo_postal_1}} </div>
+				<div class="input col-2" id="postal_code_2"> - {{form.codigo_postal_2}} </div>
+				<div class="input col-3">{{form.localidade}} </div>
+				<div class="input col-3" id="district">{{form.distrito}} </div>
+			</div>
+				
+
+		    <input type="submit" name="Continuar" id="input_btn">
+		</form>
+	</div>
+
+	<div class="col-lg-4 col-sm-10 offset-sm-1 mt-4 ordering-products">
+		<h4>Os seus produtos:</h4>
+		{% for p in cart.products.all %}
+			
+			<div class="col-lg-10 col-sm-12 mb-4" style="background: linear-gradient(360deg, #111, #020202cf, #3330), url('{{p.image.url}}') no-repeat center;
+							background-size:cover; height: 10em; margin-top: 1em;" >
+				<span class="ordered-product">
+				{{forloop.counter}}.
+				</span>
+				<span class="ordered-product">{{p.name}}</span>
+				<span class="ordered-product-price" style="color:#F76C5E">{{p.price}} €</span>
+			</div>
+		{% endfor %}	
+			<div class="col-lg-10 col-sm-12 mt-4"style="background: linear-gradient(360deg, #111, #020202cf, #333), url('https://images.pexels.com/photos/939955/pexels-photo-939955.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260') no-repeat center;
+							background-size:cover; height: 10em; margin-top: 1em;" >
+
+				<span class="ordered-product" style="color:#F76C5E">
+					Subtotal: 
+				</span>
+
+				<span class="ordered-product-price" style="color:#F76C5E">
+					{{cart.subtotal}} €
+				</span>
+				
+			</div>
+			<div class="col-lg-10 col-sm-12  mb-4"style="background: linear-gradient(90deg, #111, #020202cf, #333), url('https://images.pexels.com/photos/939955/pexels-photo-939955.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260') no-repeat center;
+							background-size:cover; height: 10em; margin-top: 1em;" >
+		
+				<span class="ordered-product" style="color:#F76C5E">
+					Total: 
+				</span>
+
+				<span class="ordered-product-price mr-auto" style="color:#F76C5E">
+					{{cart.total}} €
+				</span>
+			</div>
+
+				
+
+	</div>
+
+</div>
+<script type="text/javascript" src="{% static 'catalog/js/catalog.js' %}"></script>
+{%endblock%}
+</body>
+</html>

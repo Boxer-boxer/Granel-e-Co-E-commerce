@@ -1,0 +1,173 @@
+{%load static%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/test.css' %}">
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{%block content%}
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/catalog.css' %}">
+
+<div class="page-container row">
+<div style="bottom:0; right:15; color:#fff; position:absolute;"> Icon made by <a style="color:#fff!important" href="https://www.flaticon.com/authors/gregor-cresnar">Gregor Cresnar </a> from www.flaticon.com </div>
+<div class="cart-over col-lg-7 col-sm-12 slideIn" id="cart" style="display:none">
+	{% include 'catalog/cart.html' %}
+</div>
+
+		<div class="page-block col-10 offset-1 text-center">
+			
+			<div id="top-block">		
+				<div class="catalog-title">Catálogo</div>
+				<span class="float-right show-cart" onclick="showCart()"> <img src="https://i.imgur.com/UM1UOCR.png"> </span>
+			<!-- icon by Gregor Cresnar on	-->
+			</div>
+
+			<div class="mx-auto h1 pt-4 mt-4"> 
+				<div class="row top-links">
+					<div class=" col-5 text-left" id="home-link"><a href="{% url 'home' %}" > &#8592; Home </a></div>
+				</div>
+
+				Granel 
+			<button class="mr-auto filter-buttons show-up" id="granel-btn" onclick="showGranel()"> X </button>
+			</div>
+			<div class="col-12 product-type Granel">
+			</div>
+			<div class="col-sm-10 col-lg-8 catalog-preview mx-auto" id="middle-block-1">
+				<div class="row catalog-preview-block">	
+					{% for p in products %}
+						{% if 'Granel' in p.product_type %}
+						<div class=" col-lg-12 col-sm-12 text-center p-4 {{p.product_type}} product-block-1 "style="background: linear-gradient(90deg, #111, #020202cf, #3330), url('{{p.image.url}}') no-repeat center;
+							background-size:cover">
+							<div class="row mx-auto product-name-1">
+							<h4 class="col-12 mt-2"> {{p.name}} (<span style="color:#F76C5E">{{p.size}}</span>)</h4>
+							
+							<p class="col-12"> Preço: {{p.price}} € </p>
+							</div>
+
+							<div class="row ml-auto mt-2">
+							<a class="mx-auto" href="{% url 'product-detail' p.pk %}">
+								<button class="detail-btn mx-auto btn-info"> Ver detalhes </button>
+							</a>
+								<div class="mr-4 mx-sm-auto col-sm-12">{% include 'catalog/snippets/cart_update.html' with product=p cart=cart %} </div>
+							</div>	
+						</div>
+						{%endif%}		
+					{% endfor %}
+				</div>
+			</div>
+			
+			
+			<div class="mx-auto h1 pt-4 mt-4"> Individuais 
+			<button class="mr-auto filter-buttons show-up" id="indiv-btn" onclick="showSingles()"> X </button>
+			</div>
+
+			<div class="col-12 product-type Individuais">
+			</div>
+			<div class="col-sm-10 col-lg-8 catalog-preview mx-auto" id="middle-block-1">
+				<div class="row catalog-preview-block">	
+					
+					{% for p in products %}
+						{% if 'Individuais' in p.product_type %}
+						<div class=" col-lg-5 col-sm-8 text-center p-4 {{p.product_type}} product-block" style="background: radial-gradient(circle, #111, #2227, #3330), url('{{p.image.url}}') no-repeat center;
+							background-size:cover">	
+							<img class="product-img" src="{{p.image.url}}" style="width:150px; height:150px;">
+							<h4 class="mt-4"> {{p.name}} </h4>
+							<p> Preço: {{p.price}} € </p>
+							<div class="row mx-auto btns-block">
+							<a href="{% url 'product-detail' p.pk %}">
+								<button class="detail-btn mx-auto col-12"> Ver detalhes </button>
+							</a>
+								<div class="mx-auto col-12">{% include 'catalog/snippets/cart_update.html' with product=p cart=cart %} </div>
+							</div>	
+						</div>
+						{%endif%}		
+					{% endfor %}
+				</div>
+			</div>
+		
+			<div class="col-12" id="bottom-block">
+
+				<div class="pagination col-12">
+					<div class="step-links col-sm-12"> 
+						{% if products.has_previous %}
+							<div class="col-1 index-block">	
+								<a href="?page=1"> << </a>
+							</div>
+							
+							{% if products.has_previous %}
+							<div class="col-1 index-block">	
+								<a href="?page={{products.previous_page_number}}">{{products.previous_page_number}} </a>
+							</div>
+							{% endif %}
+							
+							{% if products.number|add:'-2' %}
+							<div class="col-1 index-block">	
+								<a href="?page={{products.number|add:'-2'}}">{{products.number|add:'-2'}} </a>
+							</div>
+							{% endif %}
+
+						{% endif %}
+
+						{% for p in products.paginator.page_range %}
+							
+							{% if products.number == p %}
+								<span class="current col-1 index-block">
+									{{products.number}}
+								</span>
+							{% endif %}
+						
+						{% endfor %}
+
+						{% if products.has_next %}
+
+							{% if products.has_next %}
+							<div class="col-1 index-block">	
+								<a href="?page={{products.next_page_number}}"> {{products.next_page_number}} </a>
+							</div>
+							{% endif %}
+							
+							{% if products.has_next|add:"2" %}
+							<div class="col-1 index-block">	
+								<a href="?page={{products.number|add:'2'}}">{{products.number|add:'2'}} </a>
+							</div>
+							{% endif %}
+
+							<a class="col-1 index-block" href="?page={{products.paginator.num_pages}}"> >> </a>
+
+
+						{% endif %}
+					</div>
+				</div>
+
+				<div>
+				<a class="no-link" href="https://goo.gl/maps/uLxjqHWJWG2ze8HC9">
+				<img class="logo-2" src="http://simpleicon.com/wp-content/uploads/map-marker-13.svg">
+				</a>
+
+				<a class="no-link" href="#">
+				<img  class="logo-2" src="https://image.flaticon.com/icons/png/512/33/33702.png">
+				</a>
+
+				<a class="no-link" href="#">
+				<img  class="logo-2" src="https://image.flaticon.com/icons/png/512/87/87390.png"></div>
+				</a>
+
+				<a href="https://goo.gl/maps/uLxjqHWJWG2ze8HC9">
+				<div class="logo-text" id="logo-text-2"> R. Nova da Piedade 47, 1200-296 Lisboa </div>
+				</a>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="{% static 'catalog/js/catalog.js' %}"></script>
+{%endblock%}
+</body>
+</html>

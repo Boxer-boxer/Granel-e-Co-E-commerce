@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand:300,400,600&display=swap');
+
+* {
+	font-family: 'Quicksand', sans-serif;
+}
+
+.product-block {
+	height: -webkit-fill-available;
+    padding: 1em;
+    background: #111;
+    color: #fff;
+}
+
+.borderbottom{
+	border-bottom: 1px solid #fff;
+}
+
+.product-detail {
+}
+
+.product-name {
+    padding: 15px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #fff;
+}
+
+#btn-catalog {
+    background: #b99e6d;
+    color: #fff;
+    transition-duration: 0.2s;
+}
+
+#btn-catalog:hover{
+	background: #765d31;
+    color: #fff;	
+}
+
+.cart-btn {
+	background: #4b9163;
+    color: #fff;
+    transition-duration: 0.2s;
+}
+
+.cart-btn:hover{
+	background: #44c871;
+    color: #fff;
+}

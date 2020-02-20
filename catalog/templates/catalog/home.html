@@ -1,0 +1,95 @@
+
+{%load static%}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/test.css' %}">
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+{%block content%}
+<div style="bottom:0; right:15; color:#fff; position:absolute;"> Icon made by <a style="color:#fff!important" href="https://www.flaticon.com/authors/gregor-cresnar">Gregor Cresnar </a> from www.flaticon.com </div>
+
+	<div class="page-container row">
+		<div class="cart-over col-lg-7 col-sm-12 slideIn" id="cart" style="display:none">
+			{% include 'catalog/cart.html' %}
+		</div>
+		<div class="page-block col-10 offset-1 text-center">
+			
+			<div class="col-12" style="height:25em; background: radial-gradient(circle, #1119, #1115, #1110), url(https://images.pexels.com/photos/921777/pexels-photo-921777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940) center !important;" id="top-block-1">		
+				<div class="show-up nav-links">
+					{% if user.is_authenticated %}
+						<a class="text-right" href="{% url 'logout' %}"> Logout </a>
+					{% else %}
+						<a class="text-right" href="{% url 'login' %}"> Login</a>  <span style="color:#f2f2f2; font-size: 20px"> | </span> 
+						<a class="text-right" href="{% url 'register' %}"> Fazer uma conta </a>
+					{% endif %}
+				</div>
+				<div><img class="logo" id="logo" src="https://www.liberal.ca/wp-content/uploads/2010/06/L-logo-white.png"></div>
+				<div class="logo-text" id="logo-text"> Granel & co. </div>
+				<div class="show-up nav-links-2 mt-4 mb-4">
+					<a href="{% url 'catalog' %}"> Catálogo </a>
+				</div>
+					<span class="float-right show-cart" onclick="showCart()"> <img src="https://i.imgur.com/UM1UOCR.png"> </span> 
+			</div>
+
+			<div class="col-8 offset-2 catalog-preview" id="middle-block-1">
+				<div class="row catalog-preview-block">	
+					{% for p in products %}
+					<div class="col-4 catalog-preview-product">
+						<a class="catalog-preview-tag no-link" href="{%url 'product-detail' p.id%}">		
+							{% if p.new %}
+							<div class="new"> Novidade! </div>
+							{% else %}
+							<div class="new"> Novidade! </div>
+							{% endif %}
+							<img src="{{p.image.url}}" class="catalog-preview-img">
+							<div class="catalog-preview-tag">{{p.name}}</div>
+						</a>
+					</div>
+					{% endfor %}
+				</div>
+				<a href="{% url 'catalog' %}" class="no-link"><div class="link-catalog text-center"> Visite o nosso catálogo </div></a>
+			</div>
+
+			<div class="col-12 about-us" id="middle-block-2">
+				<div class="row about-us-block">
+					<div class="about-us-title"> About us </div>
+					<div class="about-us-text"> Lorem Ipsum Verbis und erb oerd sandum Lorem Ipsum Verbis und erb oerd sandum Lorem Ipsum Verbis und erb oerd sandum Lorem Ipsum Verbis und erb oerd sandum Lorem Ipsum Verbis und erb oerd sandum  </div>
+				</div>
+			</div>
+
+			<div class="col-12" id="bottom-block">
+				<div>
+				<a class="no-link" href="https://goo.gl/maps/uLxjqHWJWG2ze8HC9">
+				<img class="logo-2" src="http://simpleicon.com/wp-content/uploads/map-marker-13.svg">
+				</a>
+
+				<a class="no-link" href="#">
+				<img  class="logo-2" src="https://image.flaticon.com/icons/png/512/33/33702.png">
+				</a>
+
+				<a class="no-link" href="#">
+				<img  class="logo-2" src="https://image.flaticon.com/icons/png/512/87/87390.png"></div>
+				</a>
+
+				<a href="https://goo.gl/maps/uLxjqHWJWG2ze8HC9">
+				<div class="logo-text" id="logo-text-2"> R. Nova da Piedade 47, 1200-296 Lisboa </div>
+				</a>
+			</div>
+
+		</div>
+	</div>
+
+<script type="text/javascript" src="{% static 'catalog/js/popup.js' %}"></script>
+<script type="text/javascript" src="{% static 'catalog/js/instafeed.js' %}"></script>
+{% endblock %}
+</body>
+</html>

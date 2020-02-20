@@ -1,0 +1,63 @@
+{% extends 'catalog/base.html' %}
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{%block content%}
+<div class="col-12 text-left product-block">	
+	<div class="col-12 product-name">{{product.name}}</div>
+		
+	<div class="row">	
+
+		<div class="col-lg-5 col-sm-12 text-center" style="height:16em; width:16em">
+			<img class="product-img" style="height: inherit; width: auto;" src="{{product.image.url}}">
+		</div>
+
+		<div class="row col-lg-7 col-sm-12">
+			
+			<div class="col-lg-3 col-sm-6 borderbottom mb-4">
+					Descrição do produto:
+			</div>
+			<div class="col-lg-9 col-sm-6 borderbottom text-right mb-4">
+					{{product.description}}
+			</div>
+		
+			{% if "Granel" in product.product_type %}
+				<div class="col-lg-3 col-sm-6 borderbottom">
+						Peso:
+				</div>
+				<div class="col-lg-9 col-sm-6 borderbottom text-right">
+						{{product.size}}
+				</div>
+			{% endif %}
+
+			<div class="col-lg-3 col-sm-6 borderbottom mt-4">
+					Preço:
+			</div>
+			<div class="col-lg-9 col-sm-6 borderbottom text-right mt-4">
+					{{product.price}} €
+			</div>
+			
+		</div>
+
+			<div class="col-lg-7 offset-lg-5 offset-sm-2 col-sm-8 mt-4">
+				<a href="{% url 'catalog' %}">
+				<button id="btn-catalog">
+					Voltar ao Catálogo
+				</button>
+				</a>
+			</div> 
+			<div class="col-lg-7 offset-lg-5 offset-sm-2 col-sm-8 mt-4">
+				{% include 'catalog/snippets/cart_update.html' with product=product cart=cart %} 
+			</div> 
+
+	</div>
+
+</div>	
+
+{%endblock%}
+</body>
+</html>

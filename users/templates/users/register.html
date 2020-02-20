@@ -1,0 +1,54 @@
+{%load static%}
+
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/register.css' %}">
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+{% if messages %}
+	{% for m in messages %}
+		{{m}}
+	{% endfor %}
+{% endif %}
+
+	<div class="login-form">
+
+		<form method="post">
+			{% csrf_token %}
+			<div id="helper"> Username </div>
+			{{form.username}} <br>
+
+			<div id="username-helper">
+				<p> Letras, dígitos e @, ., +, -, _ . </p>  
+			</div>
+
+			<div id="helper"> E-mail </div>
+			{{form.email}} <br>
+
+			<div id="email-helper">
+				<p>Por favor, indique um e-mail válido.</p>  
+			</div>
+
+			<div id="helper"> Password </div>
+			{{form.password1}} <br>
+			<div id="helper"> Por favor, volte a digitar a password </div>
+			{{form.password2}} <br>
+			<div id="password-helper">
+				<p> A sua password deve conter pelo menos 8 letras/números. </p>
+				<p> Evite passwords comuns. </p>
+				<p> A password não pode ser apenas números. </p>
+			</div>
+			
+
+			<button type='submit' value='submit'> Registar </button>	
+			</div>
+			
+		</form>	
+
+
+	</div>
+<script type="text/javascript" src="{% static 'catalog/js/register.js' %}"></script>
+</body>
+</html>

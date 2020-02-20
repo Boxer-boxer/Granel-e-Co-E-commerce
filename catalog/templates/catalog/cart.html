@@ -1,0 +1,59 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<link rel="stylesheet" type="text/css" href="{% static 'catalog/css/catalog.css' %}">
+</head>
+<body>
+
+{%block content%}
+
+<h1 class="cart-user"> Carrinho <span class="float-right cart-close-btn" onclick="showCart()"> X </span>
+</h1>
+{% if cart.products.all %}
+	{% for c in cart.products.all %}
+
+	<div class="product-separator" style="	background: linear-gradient(0deg, #111, #111111d1, #111111a3, #3330), url('{{c.image.url}}') repeat center;" >
+
+
+		<table class="ml-4 product-list">
+			<tr></tr>
+			<tr>
+				<th style="width:15%">Produto</th>
+				<th style="width:40%; color:#F76C5E; font-weight: 600">
+					{{c.name}}
+				</th>
+				<th>
+					<th style="width:10%">Preço</th>
+					<th style="width:40%; color:#F76C5E; font-weight: 600">{{c.price}} €</th>
+				</th>
+				<th class="text-center">
+					{% include 'users/snippets/remove_product.html' %}
+				</th>
+			</tr>
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	{%endfor%}
+
+	<h4 class="text-right total mt-4"> Subtotal: <span style="color:#F76C5E"> {{cart.subtotal}} € </span></h4>
+
+	<a href="{% url 'create-order' %}"><div class="buy-btn text-right"> Comprar </div></a>
+{% else %}
+<div class="cart-flex">
+	<h1> Parece que o seu carrinho está vazio!</h1><br>
+	<h4><a href="{% url 'catalog' %}"> Faça uma visita ao nosso catálogo.</a></h4>
+</div>
+{% endif %}
+<script type="text/javascript" src="{% static 'catalog/js/catalog.js' %}"></script>
+
+{%endblock%}
+
+
+</body>
+</html>
